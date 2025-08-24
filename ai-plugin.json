@@ -1,0 +1,19 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "My To-Do's Google Drive",
+  "name_for_model": "my_todos_google_drive",
+  "auth": {
+    "type": "oauth",
+    "client_url": "https://accounts.google.com/o/oauth2/v2/auth",
+    "authorization_content_type": "application/x-www-form-urlencoded",
+    "scope": "https://www.googleapis.com/auth/drive.file",
+    "token_url": "https://oauth2.googleapis.com/token"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://YOUR_PUBLIC_URL/.well-known/openapi.yaml"
+  },
+  "logo_url": "https://YOUR_PUBLIC_URL/logo.png",
+  "contact_email": "your@email.com",
+  "legal_info_url": "https://yourdomain.com/legal"
+}
