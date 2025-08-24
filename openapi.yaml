@@ -1,29 +1,40 @@
-{
-  "schema_version": "v1",
-  "info": {
-    "title": "My To-Do's Google Drive",
-    "description": "Read task files from a user's Google Drive",
-    "version": "1.0.0"
-  },
-  "name_for_human": "My To-Do's Google Drive",
-  "name_for_model": "my_todos_google_drive",
-  "auth": {
-    "type": "oauth",
-    "client_url": "https://accounts.google.com/o/oauth2/v2/auth",
-    "authorization_content_type": "application/x-www-form-urlencoded",
-    "scope": "https://www.googleapis.com/auth/drive.file",
-    "token_url": "https://oauth2.googleapis.com/token"
-  },
-  "api": {
-    "type": "openapi",
-    "url": "https://raw.githubusercontent.com/mpopovits/my-todos-gpt-plugin/main/openapi.yaml"
-  },
-  "logo_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png",
-  "contact_email": "michelle@example.com",
-  "legal_info_url": "https://example.com/legal",
-  "servers": [
-    {
-      "url": "https://my-todos-api.fly.dev"
-    }
-  ]
-}
+openapi: 3.0.1
+info:
+  title: My To-Do's Google Drive
+  description: Read task files from a user's Google Drive
+  version: 1.0.0
+servers:
+  - url: https://my-todos-api.fly.dev
+paths:
+  /read-file:
+    get:
+      operationId: readDriveFile
+      summary: Read a task file from Google Drive
+      parameters:
+        - name: fileId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File contents retrieved
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  content:
+                    type: string
+      security:
+        - oauth2: [drive]
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://accounts.google.com/o/oauth2/v2/auth
+          tokenUrl: https://oauth2.googleapis.com/token
+          scopes:
+            drive: Access user files on Google Drive
