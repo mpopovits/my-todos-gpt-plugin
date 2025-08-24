@@ -1,7 +1,10 @@
 openapi: 3.0.1
 info:
   title: My To-Do's Google Drive
+  description: Read task files from a user's Google Drive
   version: 1.0.0
+servers:
+  - url: https://my-todos-api.fly.dev
 paths:
   /read-file:
     get:
